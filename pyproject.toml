@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "productapi"
+version = "0.1.0"
+description = "A Product API for Summy Store"
+authors = ["Hardeep Kumar <hardeepkumar1815@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.0.1"
+yapf = "^0.32.0"
+djangorestframework = "^3.13.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

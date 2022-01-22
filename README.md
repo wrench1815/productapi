@@ -7,7 +7,6 @@
 4.  Now activate venv according to your shell.
 5.  After activating clone this repo into main project folder.
 6.  Then run this command `pip install -r requirements.txt`.
-7.  Then run `python manage.py makemigrations`.
-8.  Then `python manage.py migrate`.
-9.  Then create admin user `python manage.py createsuperuser`
-10. Then run the development server `python manage.py runserver`.
+7.  Then `python manage.py migrate`.
+8.  Then create admin user `python manage.py createsuperuser`
+9. Then run the development server `python manage.py runserver`.

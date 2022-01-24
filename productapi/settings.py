@@ -170,6 +170,13 @@ JAZZMIN_SETTINGS = {
         {
             'model': 'auth.User'
         },
+
+         # Link to Site
+        {
+            'name': 'To main Site',
+            'url': '/api',
+            'new_window': True
+        },
     ],
 
     #############

@@ -1,12 +1,25 @@
-from django.db.models import fields
 from rest_framework import serializers
-from flipkart.models import Product
+
+# flipkart imports
+from flipkart.models import Product as fproduct
+
+# amazon imports
+from amazon.models import Product as aproduct
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    '''Serializer for Product Model'''
+class FlipkartProductSerializer(serializers.ModelSerializer):
+    '''Serializer for Flipkart Product Model'''
 
     class Meta:
-        model = Product
+        model = fproduct
+        fields = '__all__'
+        depth = 1
+
+
+class AmazonProductSerializer(serializers.ModelSerializer):
+    '''Serializer for Amazon Product Model'''
+
+    class Meta:
+        model = aproduct
         fields = '__all__'
         depth = 1

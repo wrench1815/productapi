@@ -1,6 +1,9 @@
 from django.urls import path, include
-from .routers import router
+
+from flipkart.routers import router as frouter
+from amazon.routers import router as arouter
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('flipkart/', include('flipkart.urls')),
+    path('amazon/', include('amazon.urls')),
 ]

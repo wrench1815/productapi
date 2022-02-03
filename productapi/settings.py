@@ -11,22 +11,26 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+import dj_database_url
+
+# load environ variables
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f^etz4rh6x*^xik7fwjol4ggbewz%i4#-xq$g46tj9b8%7k26s'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.getenv('DEBUG_TOGGLE'))
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -39,10 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'api',
+    'flipkart',
+    'amazon',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,53 +79,53 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'productapi.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'statics'
+
+# Settings for whitenoise compression
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -128,20 +136,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'DEFAULT_PERMISSION_CLASSES':
+    ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly']
 }
 
 # yapf: disable
 # Jazzmin settings
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    'site_title': 'Whispyr Admin',
+    'site_title': 'Comparebazaar Product API Admin',
     'navbar_small_text': False,
 
     # Title on the brand, and login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    'site_header': 'Whispyr Admin',
+    'site_header': 'Comparebazaar API',
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Comparebazaar API",
 
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     # 'site_logo': 'favicon.ico',
@@ -150,7 +160,7 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'Need some Powers?',
 
     # Copyright on the footer
-    'copyright': 'wrench1815',
+    'copyright': 'preeti chib',
 
     ############
     # Top Menu #
@@ -169,6 +179,27 @@ JAZZMIN_SETTINGS = {
         # model admin to link to (Permissions checked against model)
         {
             'model': 'auth.User'
+        },
+
+         # Link to Site
+        {
+            'name': 'To main Site',
+            'url': '/api',
+            'new_window': True
+        },
+
+         # Link to flipkart api
+        {
+            'name': 'To Flipkart root',
+            'url': '/api/flipkart',
+            'new_window': True
+        },
+
+         # Link to amazon api
+        {
+            'name': 'To Amazon root',
+            'url': '/api/amazon',
+            'new_window': True
         },
     ],
 
@@ -211,7 +242,7 @@ JAZZMIN_SETTINGS = {
     'changeform_format': 'horizontal_tabs',
 
     # Render django related popups inside a modal using
-    'related_modal_active': True
+    'related_modal_active': False
 }
 
 JAZZMIN_UI_TWEAKS={

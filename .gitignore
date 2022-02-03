@@ -1,1 +1,14 @@
+# Python Cache files
 __pycache__/
+
+# DB files
+db.sqlite3
+
+# vscode related settings and files
+.vscode/
+
+# ignore env file
+.env
+
+# ignore static files folder
+statics/

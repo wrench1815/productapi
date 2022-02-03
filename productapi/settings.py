@@ -144,11 +144,11 @@ REST_FRAMEWORK = {
 # Jazzmin settings
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    'site_title': 'Whispyr Admin',
+    'site_title': 'Comparebazaar Product API Admin',
     'navbar_small_text': False,
 
     # Title on the brand, and login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    'site_header': 'Whispyr Admin',
+    'site_header': 'Comparebazaar API',
 
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     # 'site_logo': 'favicon.ico',
@@ -157,7 +157,7 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'Need some Powers?',
 
     # Copyright on the footer
-    'copyright': 'wrench1815',
+    'copyright': 'preeti chib',
 
     ############
     # Top Menu #
@@ -182,6 +182,20 @@ JAZZMIN_SETTINGS = {
         {
             'name': 'To main Site',
             'url': '/api',
+            'new_window': True
+        },
+
+         # Link to flipkart api
+        {
+            'name': 'To Flipkart root',
+            'url': '/api/flipkart',
+            'new_window': True
+        },
+
+         # Link to amazon api
+        {
+            'name': 'To Amazon root',
+            'url': '/api/amazon',
             'new_window': True
         },
     ],

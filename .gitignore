@@ -9,3 +9,6 @@ db.sqlite3
 
 # ignore env file
 .env
+
+# ignore static files folder
+statics/

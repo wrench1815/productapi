@@ -1,29 +1,22 @@
 from django.contrib import admin
-from .models import Product, Category, Vendor, Brand
+from . import models
 
 
-@admin.register(Product)
+@admin.register(models.Mobile)
 class ProductAdmin(admin.ModelAdmin):
-    '''Admin View for Product'''
+    '''Admin View for Mobile'''
 
     list_display = ('name', 'price')
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    '''Admin View for Category'''
-
-    list_display = ('name', 'description')
-
-
-@admin.register(Vendor)
+@admin.register(models.Vendor)
 class VendorAdmin(admin.ModelAdmin):
     '''Admin View for Vendor'''
 
     list_display = ('name', )
 
 
-@admin.register(Brand)
+@admin.register(models.Brand)
 class BrandAdmin(admin.ModelAdmin):
     '''Admin View for Brand'''
 

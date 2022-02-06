@@ -150,10 +150,10 @@ JAZZMIN_SETTINGS = {
     'navbar_small_text': False,
 
     # Title on the brand, and login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    'site_header': 'Comparebazaar API',
+    'site_header': 'API Administration',
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Comparebazaar API",
+    "site_brand": "API Administration",
 
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     # 'site_logo': 'favicon.ico',

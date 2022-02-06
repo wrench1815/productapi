@@ -50,9 +50,9 @@ class Display(models.Model):
 class Memory(models.Model):
     """Model definition for Memory."""
 
-    internal_memory = models.IntegerField()
-    external_memory = models.IntegerField()
-    ram = models.IntegerField()
+    internal_memory = models.FloatField()
+    external_memory = models.FloatField()
+    ram = models.FloatField()
 
     class Meta:
         """Meta definition for Memory."""
@@ -110,7 +110,7 @@ class Connectivity(models.Model):
     edge = models.BooleanField(default=True)
     nfc = models.BooleanField(default=True)
     usb = models.BooleanField(default=True)
-    bluetooth_version = models.IntegerField()
+    bluetooth_version = models.FloatField()
 
     class Meta:
         """Meta definition for Connectivity."""

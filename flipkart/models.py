@@ -84,8 +84,26 @@ class Specification(models.Model):
         return self.general.network
 
 
+class Availability(models.Model):
+    """Model definition for Availability."""
+
+    upcoming = models.BooleanField(default=False)
+    upcoming_date = models.DateField()
+    out_of_stock = models.BooleanField(default=False)
+
+    class Meta:
+        """Meta definition for Availability."""
+
+        verbose_name = 'Availability'
+        verbose_name_plural = 'Availability'
+
+    def __str__(self):
+        """Unicode representation of Availability."""
+        pass
+
+
 class Mobile(models.Model):
-    """Model definition for Product."""
+    """Model definition for Mobile."""
 
     name = models.TextField()
     price = models.FloatField()
@@ -94,8 +112,11 @@ class Mobile(models.Model):
     product_images = models.ForeignKey(ProductImageModel.ProductImage,
                                        on_delete=models.CASCADE,
                                        related_name='mobile')
-    out_of_stock = models.BooleanField(default=False)
     url = models.URLField(blank=True, null=True)
+    availability = models.ForeignKey('Availability',
+                                     on_delete=models.CASCADE,
+                                     related_name='mobile')
+
     # related fields
     specifications = models.OneToOneField(Specification,
                                           related_name='mobile',
@@ -108,11 +129,11 @@ class Mobile(models.Model):
                                on_delete=models.CASCADE)
 
     class Meta:
-        """Meta definition for Product."""
+        """Meta definition for Mobile."""
 
-        verbose_name = 'Product'
-        verbose_name_plural = 'Products'
+        verbose_name = 'Mobile'
+        verbose_name_plural = 'Mobiles'
 
     def __str__(self):
-        """Unicode representation of Product."""
+        """Unicode representation of Mobile."""
         return self.name

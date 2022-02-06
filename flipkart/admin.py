@@ -21,3 +21,20 @@ class BrandAdmin(admin.ModelAdmin):
     '''Admin View for Brand'''
 
     list_display = ('name', )
+
+
+@admin.register(models.Specification)
+class BrandAdmin(admin.ModelAdmin):
+    '''Admin View for Specification'''
+
+    # list_display = ('general', )
+
+
+@admin.register(models.Availability)
+class BrandAdmin(admin.ModelAdmin):
+    '''Admin View for Availability'''
+
+    list_display = (
+        'upcoming',
+        'upcoming_date',
+    )

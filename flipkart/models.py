@@ -88,7 +88,7 @@ class Availability(models.Model):
     """Model definition for Availability."""
 
     upcoming = models.BooleanField(default=False)
-    upcoming_date = models.DateField()
+    upcoming_date = models.DateField(null=True, blank=True)
     out_of_stock = models.BooleanField(default=False)
 
     class Meta:
@@ -99,7 +99,7 @@ class Availability(models.Model):
 
     def __str__(self):
         """Unicode representation of Availability."""
-        pass
+        return str(self.upcoming)
 
 
 class Mobile(models.Model):

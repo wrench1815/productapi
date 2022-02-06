@@ -26,7 +26,7 @@ class General(models.Model):
 
     def __str__(self):
         """Unicode representation of General."""
-        return self.network
+        return str(self.network)
 
 
 class Display(models.Model):
@@ -44,7 +44,7 @@ class Display(models.Model):
 
     def __str__(self):
         """Unicode representation of Display."""
-        return self.screen_size
+        return str(self.screen_size)
 
 
 class Memory(models.Model):
@@ -62,7 +62,7 @@ class Memory(models.Model):
 
     def __str__(self):
         """Unicode representation of Memory."""
-        return self.internal_memory
+        return str(self.internal_memory)
 
 
 class Camera(models.Model):
@@ -81,7 +81,7 @@ class Camera(models.Model):
 
     def __str__(self):
         """Unicode representation of Camera."""
-        return self.rear_camera
+        return str(self.rear_camera)
 
 
 class VideoRecording(models.Model):
@@ -97,7 +97,7 @@ class VideoRecording(models.Model):
 
     def __str__(self):
         """Unicode representation of VideoRecording."""
-        return self.rear_camera_video_quality
+        return str(self.rear_camera_video_quality)
 
 
 class Connectivity(models.Model):
@@ -120,7 +120,7 @@ class Connectivity(models.Model):
 
     def __str__(self):
         """Unicode representation of Connectivity."""
-        return self.wifi
+        return str(self.wifi)
 
 
 class Os(models.Model):
@@ -137,7 +137,7 @@ class Os(models.Model):
 
     def __str__(self):
         """Unicode representation of OS."""
-        return self.os
+        return str(self.os)
 
 
 class Processor(models.Model):
@@ -156,7 +156,7 @@ class Processor(models.Model):
 
     def __str__(self):
         """Unicode representation of Processor."""
-        return self.processor_type
+        return str(self.processor_type)
 
 
 class Battery(models.Model):
@@ -175,7 +175,7 @@ class Battery(models.Model):
 
     def __str__(self):
         """Unicode representation of Battery."""
-        return self.battery_type
+        return str(self.battery_type)
 
 
 class Sound(models.Model):
@@ -192,7 +192,7 @@ class Sound(models.Model):
 
     def __str__(self):
         """Unicode representation of Sound."""
-        return self.jack_35mm
+        return str(self.jack_35mm)
 
 
 class Body(models.Model):
@@ -212,4 +212,4 @@ class Body(models.Model):
 
     def __str__(self):
         """Unicode representation of Body."""
-        return self.body_height
+        return str(self.body_height)

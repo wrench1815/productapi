@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'flipkart',
     'amazon',
     'mobile',
+    'productimage',
 ]
 
 MIDDLEWARE = [

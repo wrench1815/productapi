@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+
+@admin.register(models.ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    '''Admin View for ProductImage'''
+
+    # list_display = ('url', )

@@ -9,7 +9,7 @@ class General(models.Model):
         ('Nano-Sim', 'Nano-Sim'),
     }
 
-    network = models.TextField()
+    network = models.CharField(max_length=255)
     sim_type = models.CharField(max_length=10,
                                 choices=SIM_TYPES,
                                 default='Micro-Sim')
@@ -51,7 +51,7 @@ class Memory(models.Model):
     """Model definition for Memory."""
 
     internal_memory = models.FloatField()
-    external_memory = models.FloatField()
+    external_memory = models.FloatField(blank=True, null=True)
     ram = models.FloatField()
 
     class Meta:
@@ -68,9 +68,9 @@ class Memory(models.Model):
 class Camera(models.Model):
     """Model definition for Camera."""
 
-    rear_camera = models.TextField()
+    rear_camera = models.CharField(max_length=255)
     rear_camera_flash = models.BooleanField(default=True)
-    front_camera = models.TextField()
+    front_camera = models.CharField(max_length=255)
     front_camera_flash = models.BooleanField(default=False)
 
     class Meta:
@@ -87,7 +87,7 @@ class Camera(models.Model):
 class VideoRecording(models.Model):
     """Model definition for VideoRecording."""
 
-    rear_camera_video_quality = models.TextField()
+    rear_camera_video_quality = models.CharField(max_length=255)
 
     class Meta:
         """Meta definition for VideoRecording."""
@@ -110,7 +110,7 @@ class Connectivity(models.Model):
     edge = models.BooleanField(default=True)
     nfc = models.BooleanField(default=True)
     usb = models.BooleanField(default=True)
-    bluetooth_version = models.FloatField()
+    bluetooth_version = models.CharField(max_length=255)
 
     class Meta:
         """Meta definition for Connectivity."""
@@ -164,8 +164,8 @@ class Battery(models.Model):
 
     battery_type = models.CharField(max_length=255)
     battery_capacity = models.CharField(max_length=255)
-    stand_by_time = models.CharField(max_length=255)
-    talktime = models.CharField(max_length=255)
+    stand_by_time = models.CharField(max_length=255, blank=True, null=True)
+    talktime = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         """Meta definition for Battery."""
@@ -202,7 +202,7 @@ class Body(models.Model):
     body_width = models.CharField(max_length=255)
     body_thickness = models.CharField(max_length=255)
     body_weight = models.CharField(max_length=255)
-    body_type = models.CharField(max_length=255)
+    body_type = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         """Meta definition for Body."""

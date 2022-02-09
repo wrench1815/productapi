@@ -17,7 +17,7 @@ class Vendor(models.Model):
 
     def __str__(self):
         """Unicode representation of Vendor."""
-        return self.name
+        return '{}'.format(self.name)
 
 
 class Brand(models.Model):
@@ -33,7 +33,7 @@ class Brand(models.Model):
 
     def __str__(self):
         """Unicode representation of Brand."""
-        return self.name
+        return '{}'.format(self.name)
 
 
 class Specification(models.Model):
@@ -81,7 +81,10 @@ class Specification(models.Model):
 
     def __str__(self):
         """Unicode representation of Specification."""
-        return self.general.network
+        return 'General:{}, Display:{}, Memory:{}, Camera:{}, Video Recording:{}, Connectivity:{}, OS:{}, Processor:{}, Battery:{}, Sound:{}, Body:{}'.format(
+            self.general, self.display, self.memory, self.camera,
+            self.video_recording, self.connectivity, self.os, self.processor,
+            self.battery, self.sound, self.body)
 
 
 class Availability(models.Model):
@@ -99,7 +102,8 @@ class Availability(models.Model):
 
     def __str__(self):
         """Unicode representation of Availability."""
-        return str(self.upcoming)
+        return 'upcoming: {} out of stock: {}'.format(self.upcoming,
+                                                      self.out_of_stock)
 
 
 class Mobile(models.Model):
@@ -136,4 +140,4 @@ class Mobile(models.Model):
 
     def __str__(self):
         """Unicode representation of Mobile."""
-        return self.name
+        return 'name: {}, price: {}'.format(self.name, self.price)

@@ -1,24 +1,19 @@
 from rest_framework import viewsets
 
-from .models import Product, Category, Brand, Vendor
-from amazon import serializers
+from . import models
+from . import serializers
 
 
-class AmazonProductViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = serializers.AmazonProductSerializer
-
-
-class AmazonCategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = serializers.AmazonCategorySerializer
+class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.Mobile.objects.all()
+    serializer_class = serializers.AmazonMobileSerializer
 
 
 class AmazonBrandViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Brand.objects.all()
+    queryset = models.Brand.objects.all()
     serializer_class = serializers.AmazonBrandSerializer
 
 
 class AmazonVendorViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Vendor.objects.all()
+    queryset = models.Vendor.objects.all()
     serializer_class = serializers.AmazonVendorSerializer

@@ -40,37 +40,37 @@ class Specification(models.Model):
     """Model definition for Specification."""
 
     general = models.ForeignKey(MobileModels.General,
-                                related_name='specification',
+                                related_name='flipkart_specification',
                                 on_delete=models.CASCADE)
     display = models.ForeignKey(MobileModels.Display,
-                                related_name='specification',
+                                related_name='flipkart_specification',
                                 on_delete=models.CASCADE)
     memory = models.ForeignKey(MobileModels.Memory,
-                               related_name='specification',
+                               related_name='flipkart_specification',
                                on_delete=models.CASCADE)
     camera = models.ForeignKey(MobileModels.Camera,
-                               related_name='specification',
+                               related_name='flipkart_specification',
                                on_delete=models.CASCADE)
     video_recording = models.ForeignKey(MobileModels.VideoRecording,
-                                        related_name='specification',
+                                        related_name='flipkart_specification',
                                         on_delete=models.CASCADE)
     connectivity = models.ForeignKey(MobileModels.Connectivity,
-                                     related_name='specification',
+                                     related_name='flipkart_specification',
                                      on_delete=models.CASCADE)
     os = models.ForeignKey(MobileModels.Os,
-                           related_name='specification',
+                           related_name='flipkart_specification',
                            on_delete=models.CASCADE)
     processor = models.ForeignKey(MobileModels.Processor,
-                                  related_name='specification',
+                                  related_name='flipkart_specification',
                                   on_delete=models.CASCADE)
     battery = models.ForeignKey(MobileModels.Battery,
-                                related_name='specification',
+                                related_name='flipkart_specification',
                                 on_delete=models.CASCADE)
     sound = models.ForeignKey(MobileModels.Sound,
-                              related_name='specification',
+                              related_name='flipkart_specification',
                               on_delete=models.CASCADE)
     body = models.ForeignKey(MobileModels.Body,
-                             related_name='specification',
+                             related_name='flipkart_specification',
                              on_delete=models.CASCADE)
 
     class Meta:
@@ -115,21 +115,21 @@ class Mobile(models.Model):
     color = models.CharField(max_length=255)
     product_images = models.ForeignKey(ProductImageModel.ProductImage,
                                        on_delete=models.CASCADE,
-                                       related_name='mobile')
+                                       related_name='flipkart_mobile')
     url = models.URLField(blank=True, null=True)
     availability = models.ForeignKey('Availability',
                                      on_delete=models.CASCADE,
-                                     related_name='mobile')
+                                     related_name='flipkart_mobile')
 
     # related fields
     specifications = models.OneToOneField(Specification,
-                                          related_name='mobile',
+                                          related_name='flipkart_mobile',
                                           on_delete=models.CASCADE)
     brand = models.ForeignKey('Brand',
-                              related_name='mobile',
+                              related_name='flipkart_mobile',
                               on_delete=models.CASCADE)
     vendor = models.ForeignKey('Vendor',
-                               related_name='mobile',
+                               related_name='flipkart_mobile',
                                on_delete=models.CASCADE)
 
     class Meta:

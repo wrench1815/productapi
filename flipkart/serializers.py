@@ -1,39 +1,30 @@
 from rest_framework import serializers
 
-from .models import Product, Category, Vendor, Brand
+from . import models
 
 
-class FlipkartProductSerializer(serializers.ModelSerializer):
-    '''Serializer for Flipkart Product Model'''
+class FlipkartMobileSerializer(serializers.ModelSerializer):
+    '''Serializer for Flipkart Mobile Model'''
 
     class Meta:
-        model = Product
+        model = models.Mobile
         fields = '__all__'
-        depth = 1
+        depth = 2
 
 
 class FlipkartBrandSerializer(serializers.ModelSerializer):
-    '''Serializer for Flipkart Product Model'''
+    '''Serializer for Flipkart Brand Model'''
 
     class Meta:
-        model = Brand
-        fields = '__all__'
-        depth = 1
-
-
-class FlipkartCategorySerializer(serializers.ModelSerializer):
-    '''Serializer for Flipkart Product Model'''
-
-    class Meta:
-        model = Category
+        model = models.Brand
         fields = '__all__'
         depth = 1
 
 
 class FlipkartVendorSerializer(serializers.ModelSerializer):
-    '''Serializer for Flipkart Product Model'''
+    '''Serializer for Flipkart Vendor Model'''
 
     class Meta:
-        model = Vendor
+        model = models.Vendor
         fields = '__all__'
         depth = 1

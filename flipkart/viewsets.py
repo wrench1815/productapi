@@ -1,24 +1,27 @@
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
 
-from .models import Product, Category, Brand, Vendor
-from flipkart import serializers
-
-
-class FlipkartProductViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = serializers.FlipkartProductSerializer
+from . import models
+from . import serializers
 
 
-class FlipkartCategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = serializers.FlipkartCategorySerializer
+class CustomResultPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+class FlipkartMobileViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.Mobile.objects.all()
+    serializer_class = serializers.FlipkartMobileSerializer
+    pagination_class = CustomResultPagination
 
 
 class FlipkartBrandViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Brand.objects.all()
+    queryset = models.Brand.objects.all()
     serializer_class = serializers.FlipkartBrandSerializer
 
 
 class FlipkartVendorViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Vendor.objects.all()
+    queryset = models.Vendor.objects.all()
     serializer_class = serializers.FlipkartVendorSerializer

@@ -1,5 +1,8 @@
 from django.db import models
 
+from mobile import models as MobileModels
+from productimage import models as ProductImageModel
+
 
 class Vendor(models.Model):
     """Model definition for Vendor."""
@@ -14,7 +17,7 @@ class Vendor(models.Model):
 
     def __str__(self):
         """Unicode representation of Vendor."""
-        return self.name
+        return '{}'.format(self.name)
 
 
 class Brand(models.Model):
@@ -30,55 +33,111 @@ class Brand(models.Model):
 
     def __str__(self):
         """Unicode representation of Brand."""
-        return self.name
+        return '{}'.format(self.name)
 
 
-class Category(models.Model):
-    """Model definition for Category."""
+class Specification(models.Model):
+    """Model definition for Specification."""
 
-    name = models.CharField(max_length=100)
-    description = models.TextField()
+    general = models.ForeignKey(MobileModels.General,
+                                related_name='amazon_specification',
+                                on_delete=models.CASCADE)
+    display = models.ForeignKey(MobileModels.Display,
+                                related_name='amazon_specification',
+                                on_delete=models.CASCADE)
+    memory = models.ForeignKey(MobileModels.Memory,
+                               related_name='amazon_specification',
+                               on_delete=models.CASCADE)
+    camera = models.ForeignKey(MobileModels.Camera,
+                               related_name='amazon_specification',
+                               on_delete=models.CASCADE)
+    video_recording = models.ForeignKey(MobileModels.VideoRecording,
+                                        related_name='amazon_specification',
+                                        on_delete=models.CASCADE)
+    connectivity = models.ForeignKey(MobileModels.Connectivity,
+                                     related_name='amazon_specification',
+                                     on_delete=models.CASCADE)
+    os = models.ForeignKey(MobileModels.Os,
+                           related_name='amazon_specification',
+                           on_delete=models.CASCADE)
+    processor = models.ForeignKey(MobileModels.Processor,
+                                  related_name='amazon_specification',
+                                  on_delete=models.CASCADE)
+    battery = models.ForeignKey(MobileModels.Battery,
+                                related_name='amazon_specification',
+                                on_delete=models.CASCADE)
+    sound = models.ForeignKey(MobileModels.Sound,
+                              related_name='amazon_specification',
+                              on_delete=models.CASCADE)
+    body = models.ForeignKey(MobileModels.Body,
+                             related_name='amazon_specification',
+                             on_delete=models.CASCADE)
 
     class Meta:
-        """Meta definition for Category."""
+        """Meta definition for Specification."""
 
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        verbose_name = 'Specification'
+        verbose_name_plural = 'Specifications'
 
     def __str__(self):
-        """Unicode representation of Category."""
-        return self.name
+        """Unicode representation of Specification."""
+        return 'General:{}, Display:{}, Memory:{}, Camera:{}, Video Recording:{}, Connectivity:{}, OS:{}, Processor:{}, Battery:{}, Sound:{}, Body:{}'.format(
+            self.general, self.display, self.memory, self.camera,
+            self.video_recording, self.connectivity, self.os, self.processor,
+            self.battery, self.sound, self.body)
 
 
-class Product(models.Model):
-    """Model definition for Product."""
+class Availability(models.Model):
+    """Model definition for Availability."""
 
-    name = models.CharField(max_length=100)
-    short_description = models.TextField()
-    long_description = models.TextField()
+    upcoming = models.BooleanField(default=False)
+    upcoming_date = models.DateField(null=True, blank=True)
+    out_of_stock = models.BooleanField(default=False)
+
+    class Meta:
+        """Meta definition for Availability."""
+
+        verbose_name = 'Availability'
+        verbose_name_plural = 'Availability'
+
+    def __str__(self):
+        """Unicode representation of Availability."""
+        return 'upcoming: {} out of stock: {}'.format(self.upcoming,
+                                                      self.out_of_stock)
+
+
+class Mobile(models.Model):
+    """Model definition for Mobile."""
+
+    name = models.TextField()
     price = models.FloatField()
     discount = models.FloatField()
-    image = models.URLField()
-    url = models.URLField()
-    stock = models.IntegerField()
+    color = models.CharField(max_length=255)
+    product_images = models.ForeignKey(ProductImageModel.ProductImage,
+                                       on_delete=models.CASCADE,
+                                       related_name='amazon_mobile')
+    url = models.URLField(blank=True, null=True)
+    availability = models.ForeignKey('Availability',
+                                     on_delete=models.CASCADE,
+                                     related_name='amazon_mobile')
 
     # related fields
+    specifications = models.OneToOneField(Specification,
+                                          related_name='amazon_mobile',
+                                          on_delete=models.CASCADE)
     brand = models.ForeignKey('Brand',
-                              related_name='products',
+                              related_name='amazon_mobile',
                               on_delete=models.CASCADE)
     vendor = models.ForeignKey('Vendor',
-                               related_name='products',
+                               related_name='amazon_mobile',
                                on_delete=models.CASCADE)
-    category = models.ForeignKey('Category',
-                                 related_name='products',
-                                 on_delete=models.CASCADE)
 
     class Meta:
-        """Meta definition for Product."""
+        """Meta definition for Mobile."""
 
-        verbose_name = 'Product'
-        verbose_name_plural = 'Products'
+        verbose_name = 'Mobile'
+        verbose_name_plural = 'Mobiles'
 
     def __str__(self):
-        """Unicode representation of Product."""
-        return self.name
+        """Unicode representation of Mobile."""
+        return 'name: {}, price: {}'.format(self.name, self.price)

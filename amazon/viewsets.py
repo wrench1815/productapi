@@ -1,24 +1,27 @@
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
 
-from .models import Product, Category, Brand, Vendor
-from amazon import serializers
-
-
-class AmazonProductViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = serializers.AmazonProductSerializer
+from . import models
+from . import serializers
 
 
-class AmazonCategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = serializers.AmazonCategorySerializer
+class CustomResultPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
+class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.Mobile.objects.all()
+    serializer_class = serializers.AmazonMobileSerializer
+    pagination_class = CustomResultPagination
 
 
 class AmazonBrandViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Brand.objects.all()
+    queryset = models.Brand.objects.all()
     serializer_class = serializers.AmazonBrandSerializer
 
 
 class AmazonVendorViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Vendor.objects.all()
+    queryset = models.Vendor.objects.all()
     serializer_class = serializers.AmazonVendorSerializer

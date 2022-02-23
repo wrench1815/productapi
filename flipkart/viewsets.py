@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.pagination import PageNumberPagination
 
 from . import models
@@ -15,6 +15,9 @@ class FlipkartMobileViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Mobile.objects.all()
     serializer_class = serializers.FlipkartMobileSerializer
     pagination_class = CustomResultPagination
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['price']
+    ordering = ['-id']
 
 
 class FlipkartBrandViewSet(viewsets.ReadOnlyModelViewSet):

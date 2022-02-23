@@ -54,26 +54,21 @@ class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = super().get_queryset()
 
         av = str(self.request.query_params.get('availability')).lower()
-        print(av)
 
         # Return only the mobiles that are upcoming
         if av == 'upcoming':
-            print('upcoming')
             queryset = queryset.filter(availability__upcoming=True)
 
         # Return only the mobiles that are not upcoming
         elif av == '-upcoming':
-            print('-upcoming')
             queryset = queryset.filter(availability__upcoming=False)
 
         # Return only the mobiles that are out of stock
         elif av == 'out_of_stock':
-            print('out_of_stock')
             queryset = queryset.filter(availability__out_of_stock=True)
 
         # Return only the mobiles that are not out of stock
         elif av == '-out_of_stock':
-            print('-out_of_stock')
             queryset = queryset.filter(availability__out_of_stock=False)
 
         return queryset

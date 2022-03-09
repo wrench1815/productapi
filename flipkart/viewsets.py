@@ -48,8 +48,6 @@ class FlipkartMobileViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         '''
             Custom Queryset for Filters
-
-            Note: only one filter can be called at a time
         '''
         queryset = super().get_queryset()
 
@@ -91,7 +89,7 @@ class FlipkartMobileViewSet(viewsets.ReadOnlyModelViewSet):
         elif q_price_start and q_price_end:
             queryset = queryset.filter(price__range=(int(q_price_start),
                                                      int(q_price_end)))
-        # if vendoe is passed in query params
+        # if vendor is passed in query params
         elif q_vendor:
             queryset = queryset.filter(vendor__id=int(q_vendor))
 

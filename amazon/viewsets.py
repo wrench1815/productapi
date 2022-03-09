@@ -48,28 +48,83 @@ class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         '''
             Custom Queryset for Filters
-
-            Note: only one filter can be called at a time
         '''
         queryset = super().get_queryset()
 
-        av = str(self.request.query_params.get('availability')).lower()
+        # get brand from query parameters
+        q_brand = self.request.query_params.get('brand')
 
-        # Return only the mobiles that are upcoming
-        if av == 'upcoming':
-            queryset = queryset.filter(availability__upcoming=True)
+        # get availablity from query parameters
+        q_av = str(self.request.query_params.get('availability')).lower()
 
-        # Return only the mobiles that are not upcoming
-        elif av == '-upcoming':
-            queryset = queryset.filter(availability__upcoming=False)
+        # get price_start from query parameters
+        q_price_start = self.request.query_params.get('price_start')
 
-        # Return only the mobiles that are out of stock
-        elif av == 'out_of_stock':
-            queryset = queryset.filter(availability__out_of_stock=True)
+        # get price_end from query parameters
+        q_price_end = self.request.query_params.get('price_end')
 
-        # Return only the mobiles that are not out of stock
-        elif av == '-out_of_stock':
-            queryset = queryset.filter(availability__out_of_stock=False)
+        # get price_end from query parameters
+        q_vendor = self.request.query_params.get('vendor')
+
+        if q_brand and q_av:
+            queryset = queryset.filter(brand__id=int(q_brand))
+
+            # Return only the mobiles that are upcoming
+            if q_av == 'upcoming':
+                queryset = queryset.filter(availability__upcoming=True)
+
+            # Return only the mobiles that are not upcoming
+            elif q_av == '-upcoming':
+                queryset = queryset.filter(availability__upcoming=False)
+
+            # Return only the mobiles that are out of stock
+            elif q_av == 'out_of_stock':
+                queryset = queryset.filter(availability__out_of_stock=True)
+
+            # Return only the mobiles that are not out of stock
+            elif q_av == '-out_of_stock':
+                queryset = queryset.filter(availability__out_of_stock=False)
+
+        # if price_start and price_end are passed in query params
+        elif q_price_start and q_price_end:
+            queryset = queryset.filter(price__range=(int(q_price_start),
+                                                     int(q_price_end)))
+        # if vendor is passed in query params
+        elif q_vendor:
+            queryset = queryset.filter(vendor__id=int(q_vendor))
+
+            # Return only the mobiles that are upcoming
+            if q_av == 'upcoming':
+                queryset = queryset.filter(availability__upcoming=True)
+
+            # Return only the mobiles that are not upcoming
+            elif q_av == '-upcoming':
+                queryset = queryset.filter(availability__upcoming=False)
+
+            # Return only the mobiles that are out of stock
+            elif q_av == 'out_of_stock':
+                queryset = queryset.filter(availability__out_of_stock=True)
+
+            # Return only the mobiles that are not out of stock
+            elif q_av == '-out_of_stock':
+                queryset = queryset.filter(availability__out_of_stock=False)
+
+        else:
+            # Return only the mobiles that are upcoming
+            if q_av == 'upcoming':
+                queryset = queryset.filter(availability__upcoming=True)
+
+            # Return only the mobiles that are not upcoming
+            elif q_av == '-upcoming':
+                queryset = queryset.filter(availability__upcoming=False)
+
+            # Return only the mobiles that are out of stock
+            elif q_av == 'out_of_stock':
+                queryset = queryset.filter(availability__out_of_stock=True)
+
+            # Return only the mobiles that are not out of stock
+            elif q_av == '-out_of_stock':
+                queryset = queryset.filter(availability__out_of_stock=False)
 
         return queryset
 

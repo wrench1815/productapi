@@ -28,6 +28,17 @@ class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
         Keyword: search
         Usage: ?search=<keyword> eg; ?search=samsung
 
+        Filter by additional pramas: brand, price(range), vendor
+            brand
+            Keyword: brand
+            Usage: ?brand=<brand_id> eg: ? brand=1
+            price(range)
+            Keyword: price_start, price_end
+            Usage: ?price_start=<start_range>&price_end=<end_range> eg: ?price_start=100&price_end=500
+            vendor
+            Keyword: vendor
+            Usage: ?price_start=<vendor_id> eg: ?vendor=1
+
         Pagination: Active
         Keyword: page_size, page
         Usage: ?page_size=<number>&page=<number> eg; ?page_size=10&page=2

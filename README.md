@@ -1,12 +1,30 @@
-# Product API Docs
+# Product API
 
 ## Project Setup
-1.  Install python v3.10.
-2.  Create a project folder.
-3.  Inside that folder create virutal environment using this command: `python -m venv venv` or `python3 -m venv venv`.
-4.  Now activate venv according to your shell.
-5.  After activating clone this repo into main project folder.
-6.  Then run this command `pip install -r requirements.txt`.
-7.  Then `python manage.py migrate`.
-8.  Then create admin user `python manage.py createsuperuser`
-9. Then run the development server `python manage.py runserver`.
+1. Install Python v3.10.
+2. Create a Virtual Environment.
+    ```zsh
+    python -m venv <environment_name>
+    # or
+    python3 -m venv <environment_name>
+    ```
+3. Activate the Environment as per OS.
+4. Install Packages.
+    ```zsh
+    # Poetry
+    poetry install
+    # pip
+    pip install -r requirements.txt
+    ```
+5. Apply migrations.
+    ```zsh
+    python manage.py migrate
+    ```
+6. Create Admin.
+    ```zsh
+    python manage.py createsuperuser
+    ```
+7. Run development server.
+    ```zsh
+    python manage.py runserver
+    ```

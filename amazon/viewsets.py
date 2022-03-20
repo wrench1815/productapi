@@ -24,9 +24,10 @@ class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
         Usage: ?ordering=<keyword> eg; ?ordering=price or ?ordering=-price
         Note: default filter works when there is no keyword
 
-        Searching Avaialble: name
-        Keyword: search
+        Searching Avaialble: name, os, network, ram
+        Keyword: search, os, network, ram
         Usage: ?search=<keyword> eg; ?search=samsung
+        Note: the search is Fuzzy Case Insensitive
 
         Filter by additional pramas: brand, price(range), vendor
             brand
@@ -77,6 +78,15 @@ class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
         # get price_end from query parameters
         q_vendor = self.request.query_params.get('vendor')
 
+        # get os from query parameters
+        q_os = self.request.query_params.get('os')
+
+        # get network from query parameters
+        q_network = self.request.query_params.get('network')
+
+        # get ram from query parameters
+        q_ram = self.request.query_params.get('ram')
+
         if q_brand and q_av:
             queryset = queryset.filter(brand__id=int(q_brand))
 
@@ -95,6 +105,20 @@ class AmazonMobileViewSet(viewsets.ReadOnlyModelViewSet):
             # Return only the mobiles that are not out of stock
             elif q_av == '-out_of_stock':
                 queryset = queryset.filter(availability__out_of_stock=False)
+
+        elif q_os:
+            # perform case insensitive search if 'q_os' contains in field
+            queryset = queryset.filter(specifications__os__os__icontains=q_os)
+
+        elif q_network:
+            # perform case insensitive search if 'q_network' contains in field
+            queryset = queryset.filter(
+                specifications__general__network__icontains=q_network)
+
+        elif q_ram:
+            # perform case insensitive search if 'q_ram' contains in field
+            queryset = queryset.filter(
+                specifications__memory__ram__icontains=q_ram)
 
         # if price_start and price_end are passed in query params
         elif q_price_start and q_price_end:
